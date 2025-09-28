@@ -24,13 +24,13 @@ GUID = '3312c880-4667-4e19-ba22-489fc4cdf1c5'
 Author = 'Sean Powell (seabopo)'
 
 # Company or vendor of this module
-CompanyName = ''
+# CompanyName = ''
 
 # Copyright statement for this module
 Copyright = '(c) Sean Powell. MIT License.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'A PowerShell module to call FFMPEG, a cross-platform solution to record, convert and stream audio and video.'
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '7.4.0'
