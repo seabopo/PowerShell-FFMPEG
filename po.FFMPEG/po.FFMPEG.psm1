@@ -44,7 +44,7 @@
     }
 
   # Export all the public functions and aliases (enable for testing only - it affects automatic function discovery)
-    Export-ModuleMember -Function * -Alias *
+    # Export-ModuleMember -Function * -Alias *
 
   # Export the public variables (these must be done here, they don't work when done in the manifest.)
     # Export-ModuleMember -Variable PS_VARIABLE
@@ -58,6 +58,6 @@
 # Validate FFMPEG Binary Initialization
 #==================================================================================================================
 
-    if ( -not $( Test-FFMPEGInstalled ) ) {
+    if ( -not $( Test-FFmpegInstalled ) ) {
         Show-MissingBinaryMessage
     }
