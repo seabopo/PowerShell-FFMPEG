@@ -1,6 +1,6 @@
 #==================================================================================================================
 #==================================================================================================================
-# po.ModuleName
+# po.FFMPEG
 #==================================================================================================================
 #==================================================================================================================
 
@@ -14,9 +14,12 @@
 
     $ErrorActionPreference = "Stop"
 
-    Set-Variable -Scope 'Script' -Name "PS_MODULE_ROOT"  -Value $PSScriptRoot
-    Set-Variable -Scope 'Script' -Name "PS_MODULE_NAME"  -Value $($PSScriptRoot | Split-Path -Leaf)
+    Set-Variable -Scope 'Script' -Name "PS_MODULE_ROOT"    -Value $PSScriptRoot
+    Set-Variable -Scope 'Script' -Name "PS_MODULE_NAME"    -Value $($PSScriptRoot | Split-Path -Leaf)
 
+    Set-Variable -Scope 'Script' -Name "FFMPEG_INSTALLED"  -Value $false
+    Set-Variable -Scope 'Script' -Name "FFMPEG_VERSION"    -Value '20240608.083822.1ed9031'
+    
     $defaultVerboseTypes = '["Header","Process","Information","Debug","FunctionCall","FunctionResult"]'
 
     if ( $null -eq $env:PS_STATUSMESSAGE_VERBOSE_MESSAGE_TYPES ) {
@@ -49,4 +52,12 @@
   # Load all private functions
     $privateFunctionsRootFolders | ForEach-Object {
         Get-ChildItem -Path "$PS_MODULE_ROOT/$_/*.ps1" -Recurse | ForEach-Object { . $($_.FullName) }
+    }
+
+#==================================================================================================================
+# Validate FFMPEG Binary Initialization
+#==================================================================================================================
+
+    if ( -not $( Test-FFMPEGInstalled ) ) {
+        Show-MissingBinaryMessage
     }
