@@ -43,7 +43,7 @@ function Get-FFprobeEncodingSummary {
             if ( Test-IsSomething($v.streams) ) {
 
                 foreach ( $stream in $v.streams ) {
-                    $stream | Out-File -LiteralPath $( $File + '.txt' ) -Append
+                    #$stream | Out-File -LiteralPath $( $File + '.txt' ) -Append
                     if ( Test-IsSomething($stream.codec_name) ) {
 
                         switch -Wildcard ( $stream.codec_name ) {
