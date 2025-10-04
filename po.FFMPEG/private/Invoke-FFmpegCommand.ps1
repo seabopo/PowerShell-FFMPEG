@@ -63,21 +63,21 @@ function Invoke-FFmpegCommand {
                 $r = Invoke-Cmd -c $cmd -r 0
                 Write-Msg -d -m 'Command Result: ' -il 1 -o $r
 
-                if ( -not $r.success ) { Throw $r.message }
-
             }
             else {
-                Throw $('The specified file was not found: {0}' -f $File)
+                Throw $('Invoke-FFmpegCommand: The specified file was not found: {0}' -f $File)
             }
             
         }
         else {
-            Throw 'MPEG data cannot be read or written. FFmpeg was not found.'
+            Throw $('Invoke-FFmpegCommand: MPEG data cannot be read or written. FFmpeg was not found.')
         }
 
-        Write-Msg -FunctionResult -o $r.value
+        if ( -not $r.success ) { Write-Msg -e -ps -ds -lc -m $($r.message) }
 
-        return $r.value
+        Write-Msg -FunctionResult -o $( $r.success ? $r.value : $r.message )
+
+        return $r
 
     }
 }

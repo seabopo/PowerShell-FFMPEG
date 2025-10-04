@@ -10,10 +10,10 @@ function Read-FFmpegFileProperties {
         REQUIRED. String. Alias: -f. The fully-qualified file path of an MPEG file.
 
     .EXAMPLE
-        Read-FFmpegFileProperties -FilePath 'C:\myfile.mp4' -SaveToFile
+        Read-FFmpegFileProperties -FilePath 'C:\myfile.mp4'
 
     .EXAMPLE
-        Read-FFmpegFileProperties -f 'C:\myfile.mp4' -s
+        Read-FFmpegFileProperties -f 'C:\myfile.mp4'
     #>
     [OutputType([Hashtable])]
     [CmdletBinding()]
@@ -28,17 +28,19 @@ function Read-FFmpegFileProperties {
             Write-Msg -FunctionCall -IncludeParameters
 
             $r = Invoke-FFprobeCommand -File $File
-
-            $result = $r | ConvertFrom-JSON
+            if ( $r.success ) {
+                $r.value = $r.value | ConvertFrom-JSON
+            }
             
         }
         catch {
             Write-Msg -x -o $_
+            $r = @{ success = $false; message = $_.Exception.Message; value = $null }
         }
 
-        Write-Msg -FunctionResult -o $result -MaxRecursionDepth 5
+        Write-Msg -FunctionResult -o $( $r.success ? $r.value : $r.message ) -MaxRecursionDepth 5
 
-        return $result
+        return $r
 
     }
 
