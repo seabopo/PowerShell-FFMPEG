@@ -15,7 +15,7 @@ function Read-FFmpegFileProperties {
     .EXAMPLE
         Read-FFmpegFileProperties -f 'C:\myfile.mp4'
     #>
-    [OutputType([Hashtable])]
+    [OutputType([PSCustomObject])]
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)] [Alias('f')] [String] $File
