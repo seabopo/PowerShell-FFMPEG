@@ -29,7 +29,10 @@ function Read-FFmpegFileProperties {
 
             $r = Invoke-FFprobeCommand -File $File
             if ( $r.success ) {
-                $r.value = $r.value | ConvertFrom-JSON
+                $result = @{ success = $true; value = $( $r.value | ConvertFrom-JSON ) }
+            }
+            else {
+                $result = $r
             }
             
         }
@@ -38,9 +41,9 @@ function Read-FFmpegFileProperties {
             $r = @{ success = $false; message = $_.Exception.Message; value = $null }
         }
 
-        Write-Msg -FunctionResult -o $( $r.success ? $r.value : $r.message ) -MaxRecursionDepth 5
+        Write-Msg -FunctionResult -o $result
 
-        return $r
+        return $result
 
     }
 

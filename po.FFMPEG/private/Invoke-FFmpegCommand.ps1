@@ -60,24 +60,30 @@ function Invoke-FFmpegCommand {
                 Write-Msg -d -il 1 -m $( 'File Exists: {0}' -f $File )
 
                 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-                $r = Invoke-Cmd -c $cmd -r 0
-                Write-Msg -d -m 'Command Result: ' -il 1 -o $r
+                $r = Invoke-Cmd -c $cmd -r 0 -x
 
+                Write-Msg -d -m 'Command Result: ' -il 1 -o $r
+                
+                if ( $r.success ) {
+                    $result = @{ success = $true; value = $( $r.value ) }
+                }
+                else {
+                    $result = @{ success = $false; message = $r.message }
+                }
+                
             }
             else {
-                Throw $('Invoke-FFmpegCommand: The specified file was not found: {0}' -f $File)
+                $result = @{ success = $false; message = $('The specified file was not found: {0}' -f $File) }
             }
             
         }
         else {
-            Throw $('Invoke-FFmpegCommand: MPEG data cannot be read or written. FFmpeg was not found.')
+            $result = @{ success = $false; message = 'MPEG data cannot be read. FFmpeg was not found.' }
         }
 
-        if ( -not $r.success ) { Write-Msg -e -ps -ds -lc -m $($r.message) }
+        Write-Msg -FunctionResult -o $result
 
-        Write-Msg -FunctionResult -o $( $r.success ? $r.value : $r.message )
-
-        return $r
+        return $result
 
     }
 }
