@@ -14,11 +14,11 @@
 
     $ErrorActionPreference = "Stop"
 
-    Set-Variable -Scope 'Script' -Name "PS_MODULE_ROOT"    -Value $PSScriptRoot
-    Set-Variable -Scope 'Script' -Name "PS_MODULE_NAME"    -Value $($PSScriptRoot | Split-Path -Leaf)
+    Set-Variable -Scope 'Script' -Name "PS_MODULE_ROOT"   -Value $PSScriptRoot
+    Set-Variable -Scope 'Script' -Name "PS_MODULE_NAME"   -Value $($PSScriptRoot | Split-Path -Leaf)
 
-    Set-Variable -Scope 'Script' -Name "FFMPEG_INSTALLED"  -Value $false
-    Set-Variable -Scope 'Script' -Name "FFMPEG_VERSION"    -Value '20240608.083822.1ed9031'
+    Set-Variable -Scope 'Script' -Name "FFMPEG_INSTALLED" -Value $false
+    Set-Variable -Scope 'Script' -Name "FFMPEG_VERSION"   -Value '20240608.083822.1ed9031'
     
     $defaultVerboseTypes = '["Header","Process","Information","Debug","FunctionCall","FunctionResult"]'
 

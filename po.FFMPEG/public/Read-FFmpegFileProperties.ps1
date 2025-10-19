@@ -4,7 +4,7 @@ function Read-FFmpegFileProperties {
         Returns the FFPROBE stream analyzer data for a file.
 
     .OUTPUTS
-        A Hashtable containing the stream information.
+        A PSCustomObject containing the stream information.
 
     .PARAMETER File
         REQUIRED. String. Alias: -f. The fully-qualified file path of an MPEG file.

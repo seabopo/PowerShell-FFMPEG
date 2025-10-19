@@ -8,7 +8,10 @@ function Invoke-FFmpegCommand {
           - Invoke-FFprobeCommand : runs an ffprobe command.
 
     .OUTPUTS
-        A string array containing the results of the command.
+        A PSCustomObject RESULT object with the following properties:
+          - Success : Boolean indicating success or failure.
+          - Value   : A string array of console line results.
+          - Message : The Error/Exception Message, if one occurred.
 
     .PARAMETER File
         REQUIRED. String. Alias: -f. The fully-qualified file path of an MPEG file.
@@ -20,15 +23,12 @@ function Invoke-FFmpegCommand {
           - Invoke-FFprobeCommand : -v quiet -print_format json -show_format -show_streams
 
     .EXAMPLE
-        Invoke-FFmpegCommand -File 'C:\myfile.mp4' -Command '--textdata' -SaveToFile
+        Invoke-FFmpegCommand -File 'C:\myfile.mp4' -Command '-show_streams'
 
     .EXAMPLE
-        Invoke-FFprobeCommand -p 'C:\myfile.mp4' -c '--textdata' -s
-
-    .NOTES
-        Results are returned as a string array of console line results.
+        Invoke-FFprobeCommand -p 'C:\myfile.mp4' -c '-show_streams'
     #>
-    [OutputType([String[]])]
+    [OutputType([PSCustomObject])]
     [Alias('Invoke-FFprobeCommand')]
     [CmdletBinding()]
     param (
@@ -44,7 +44,7 @@ function Invoke-FFmpegCommand {
 
             if ( $MyInvocation.InvocationName -eq 'Invoke-FFprobeCommand' ) {
                 if ( [String]::IsNullOrEmpty($Command) ) {
-                    $Command = '-v quiet -print_format json -show_format -show_streams'
+                    $Command = '-v quiet -print_format json -show_format -show_streams -show_chapters'
                 }
                 $cmd = $( "FFprobe {0} `"{1}`"" -f $Command, $File )
             }

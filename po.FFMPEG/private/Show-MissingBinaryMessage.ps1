@@ -42,7 +42,7 @@ function Show-MissingBinaryMessage {
                 'PATH environment variable for the module to work.','',
 
                 'Please note that this module is only tested against FFMPEG release version',
-                $('"{0}"' -f $AP_VERSION),'',
+                $('"{0}"' -f $FFMPEG_VERSION),'',
 
                 'For additional information see https://github.com/seabopo/PowerShell-FFMPEG',''
 
