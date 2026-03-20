@@ -116,7 +116,7 @@ PrivateData = @{
         # RequireLicenseAcceptance = $false
 
         # External dependent modules of this module
-        ExternalModuleDependencies = @('po.Toolkit','FFMPEG')
+        ExternalModuleDependencies = @('po.Toolkit')
 
     } # End of PSData hashtable
 
