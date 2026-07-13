@@ -8,16 +8,16 @@ This tool is an open-source project [licensed under the GNU GPL and LGPL license
 [FFMPEG](https://ffmpeg.org/)
 
 On MacOS, the FFMPEG binary can be installed using Homebrew with the
-following command: 
-    ```
+following command:  
+```
     $ brew install ffmpeg
-    ```
+```
 
 On Windows, the FFMPEG binary can be installed using Chocolatey with the
-following command: 
-    ```
+following command:  
+```
     $ choco install ffmpeg
-    ```
+```
 
 Users of all operating systems can [download](https://ffmpeg.org/download.html) the latest binary and source versions from the [FFMPEG project site](https://ffmpeg.org/).
 
@@ -26,7 +26,7 @@ will automatically be added to the operating system PATH environment variable.
 If FFMPEG was installed manually you must add the path to the system
 PATH environment variable for the module to work.
 
-Please note that this module is only tested against FFMPEG release version 8.0.
+Please note that this module is only tested against FFMPEG version 8.0.
 
 For additional information see https://github.com/seabopo/PowerShell-FFMPEG
 
