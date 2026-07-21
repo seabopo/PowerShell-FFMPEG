@@ -17,15 +17,19 @@ function New-FFmpegThumbnail {
         height) of the output image. The image is scaled proportionally so its largest dimension
         matches this value. Default Value: 600
 
+    .PARAMETER Quality
+        REQUIRED. Int. Alias: -q. The quality of the resulting JPEG file. Range: 2-31. Default Value: 10
+
     .EXAMPLE
         New-FFmpegThumbnail -inputFile 'C:\myfile.jpg' -outputFile 'C:\myfile-resized.jpg' -MaxDimension 1000
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory)] [Alias('i')] [String] $inputFile,
-        [Parameter(Mandatory)] [Alias('o')] [String] $outputFile,
-        [Parameter()]          [Alias('m')] [Int]    $MaxDimension = 600
+        [Parameter(Mandatory)]              [Alias('i')] [String] $inputFile,
+        [Parameter(Mandatory)]              [Alias('o')] [String] $outputFile,
+        [Parameter()]                       [Alias('m')] [Int]    $MaxDimension = 300,
+        [Parameter()] [ValidateRange(2,31)] [Alias('q')] [Int]    $Quality = 10
     )
 
     process {
@@ -46,6 +50,7 @@ function New-FFmpegThumbnail {
                             $('ffmpeg -loglevel error -y'),
                             $('-i "{0}"' -f $inputFile),
                             $('-vf "scale=''min({0},iw)'':''min({0},ih)'':force_original_aspect_ratio=decrease"' -f $MaxDimension),
+                            $('-q:v {0}' -f $Quality),
                             $('-update 1 "{0}"' -f $outputFile)
                         ) -Join ' '
 
