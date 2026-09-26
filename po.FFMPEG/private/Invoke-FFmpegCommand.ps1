@@ -46,13 +46,13 @@ function Invoke-FFmpegCommand {
                 if ( [String]::IsNullOrEmpty($Command) ) {
                     $Command = '-v quiet -print_format json -show_format -show_streams -show_chapters'
                 }
-                $cmd = $( "FFprobe {0} `"{1}`"" -f $Command, $File )
+                $cmd = $( "ffprobe {0} `"{1}`"" -f $Command, $File )
             }
             else {
                 if ([String]::IsNullOrEmpty($Command) ) {
                     $Command = ''
                 }
-                $cmd = $( "FFmpeg {0} `"{1}`"" -f $Command, $File )
+                $cmd = $( "ffmpeg {0} `"{1}`"" -f $Command, $File )
             }
 
             if ( Test-Path -LiteralPath $File -ErrorAction Ignore ) {

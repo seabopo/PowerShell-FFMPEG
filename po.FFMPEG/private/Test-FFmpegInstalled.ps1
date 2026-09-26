@@ -19,7 +19,7 @@ function Test-FFmpegInstalled {
 
             Write-Msg -FunctionCall
 
-            $test = Invoke-Cmd -c $( 'FFMPEG -version' ) -r 0 -f -s
+            $test = Invoke-Cmd -c $( 'ffmpeg -version' ) -r 0 -f -s
             if ( $test.Success ) {
                 Write-Msg -d -il 1 -m $( 'FFMPEG found. Test successful.' )
                 $Script:FFMPEG_INSTALLED = $true
