@@ -35,8 +35,8 @@
 #==================================================================================================================
 
   # Define the root folder source lists for public and private functions
-    $publicFunctionsRootFolders  = @('Public')
-    $privateFunctionsRootFolders = @('Private')
+    $publicFunctionsRootFolders  = @('public')
+    $privateFunctionsRootFolders = @('private')
 
   # Load all public functions
     $publicFunctionsRootFolders | ForEach-Object {
